@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>조선 말기 빈칸 퀴즈 – 거대한 파도 앞에서</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Jua&display=swap">
+<style>
+:root{--bg:#eef1f3;--card:#fff;--ink:#17222e;--mute:#5d6b78;--line:#d3dae0;--blue:#2b5f94;--red:#c4392f;--gold:#d9a21b;--ok:#2e8b57;--chip:#e4ebf2;
+--sans:"Gowun Batang","Noto Serif KR","Batang",serif;--disp:"Jua","Gowun Batang",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a26;--card:#192634;--ink:#eaf0f5;--mute:#93a3b3;--line:#2b3b4b;--blue:#6aa3dc;--red:#ee6a5e;--gold:#f0c04a;--ok:#55c585;--chip:#223445}}
+:root[data-theme="dark"]{--bg:#101a26;--card:#192634;--ink:#eaf0f5;--mute:#93a3b3;--line:#2b3b4b;--blue:#6aa3dc;--red:#ee6a5e;--gold:#f0c04a;--ok:#55c585;--chip:#223445}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.7;min-height:100vh}
+.dancheong{height:10px;background:repeating-linear-gradient(90deg,var(--blue) 0 40px,var(--red) 40px 80px,var(--gold) 80px 120px,var(--ink) 120px 160px)}
+main{max-width:720px;margin:0 auto;padding:20px 16px 40px}
+h1,h2,.disp{font-family:var(--disp);font-weight:400;margin:0}
+h1{font-size:clamp(30px,7vw,46px);line-height:1.2}
+.sub{color:var(--mute);margin:8px 0 24px}
+.stages{display:grid;gap:14px}
+.stage{display:flex;gap:16px;align-items:center;text-align:left;width:100%;background:var(--card);border:2px solid var(--line);border-left:10px solid var(--c);border-radius:6px;padding:16px;color:inherit;font:inherit;cursor:pointer;transition:transform .15s}
+.stage:hover{transform:translateX(4px)}
+.stage .n{font-family:var(--disp);font-size:34px;color:var(--c);min-width:60px}
+.stage b{font-family:var(--disp);font-weight:400;font-size:21px;display:block;line-height:1.3}
+.stage small{color:var(--mute)}
+.stars{margin-left:auto;font-size:22px;color:var(--gold);white-space:nowrap}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.back,.tool{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:4px 14px;font:inherit;font-size:15px;cursor:pointer}
+.hearts{margin-left:auto;font-size:22px;letter-spacing:2px}
+.score{font-family:var(--disp);font-size:20px;min-width:80px;text-align:right}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--c);width:0;transition:width .4s}
+.q{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--c);border-radius:6px;padding:24px 20px;min-height:170px;position:relative}
+.q .tag{font-family:var(--disp);color:var(--c);font-size:16px;margin-bottom:6px}
+.q p{margin:0;font-size:clamp(19px,4.6vw,23px);line-height:1.95;word-break:keep-all}
+.blank{display:inline-block;min-width:5.5em;text-align:center;border-bottom:3px solid var(--ink);margin:0 4px;font-family:var(--disp);padding:0 6px;line-height:1.4}
+.blank.ok{color:var(--red);border-color:var(--red);animation:stamp .45s cubic-bezier(.2,1.6,.4,1)}
+.blank.no{color:var(--mute)}
+@keyframes stamp{0%{transform:scale(2.4) rotate(-8deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.fb{margin-top:14px;padding:10px 14px;border-radius:6px;font-size:16px;background:var(--chip);display:none}
+.fb.show{display:block}
+.fb.good{border-left:6px solid var(--ok)}.fb.bad{border-left:6px solid var(--red)}
+.bank{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 10px}
+.chip{background:var(--chip);border:2px solid var(--line);color:var(--ink);font:inherit;font-size:17px;border-radius:8px;padding:8px 14px;cursor:pointer;transition:transform .1s}
+.chip:hover:not(:disabled){transform:translateY(-3px);border-color:var(--c)}
+.chip:disabled{opacity:.35;text-decoration:line-through;cursor:default}
+.actions{display:flex;gap:10px;justify-content:space-between;align-items:center}
+.combo{color:var(--red);font-family:var(--disp);min-height:1.7em}
+.btn{background:var(--c,var(--blue));color:#fff;border:0;border-radius:8px;padding:12px 26px;font-family:var(--disp);font-size:19px;cursor:pointer}
+.res{text-align:center}
+.res .big{font-size:64px;color:var(--gold);letter-spacing:6px}
+.res .pt{font-family:var(--disp);font-size:44px}
+.wr{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:6px;padding:12px 16px;margin:16px 0;font-size:16px}
+.wr li{margin:6px 0}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="dancheong"></div>
+<main id="app"></main>
+<script>
+var S=[
+{n:"1막",t:"닫힌 문과 두드리는 대포",s:"통상 요구 ~ 척화비",c:"var(--blue)",q:[
+["1860년대 서양의 증기선(이양선)이 조선 바다에 나타나 무역을 하자며 {}를 해왔습니다.","통상 요구","서양 배들이 와서 “우리와 무역하자”고 요구한 것입니다."],
+["어린 고종 대신 나라를 다스리던 {}은 서양 세력의 침략을 경계해 통상을 단호히 거절했습니다.","흥선대원군","고종의 아버지로, 문을 굳게 닫는 정책을 펼쳤습니다."],
+["프랑스가 군함을 끌고 강화도로 쳐들어온 {} 때, 조선군은 정족산성에서 승리했습니다.","병인양요","1866년(병인년)에 일어난 서양의 소란(양요)입니다."],
+["프랑스군이 물러가면서 왕실의 귀중한 기록물인 {}를 약탈해 갔습니다.","외규장각 의궤","강화도 외규장각에 보관된 왕실 행사 기록입니다."],
+["미국이 강화도 광성보를 공격한 {}에서는 어재연 장군과 조선군이 끝까지 맞서 싸웠습니다.","신미양요","1871년(신미년) 미국이 조약을 맺자며 쳐들어왔습니다."],
+["두 차례 침략을 물리친 뒤, 흥선대원군은 서양과 화친하는 것은 나라를 파는 일이라는 경고문을 새긴 {}를 전국 곳곳에 세웠습니다.","척화비","‘화친을 물리친다’는 뜻의 비석입니다."]]},
+{n:"2막",t:"강제로 열린 문과 집안 싸움",s:"운요호 ~ 갑신정변",c:"var(--red)",q:[
+["흥선대원군이 물러난 뒤, 먼저 서양 무기로 무장한 일본이 군함 {}를 보내 대포를 쏘며 조선에 문을 열라고 위협했습니다.","운요호","1875년 강화도 앞바다에서 일어난 사건입니다."],
+["일본의 무력 협박에 굴복한 조선은 최초의 근대적 조약인 {}(1876)을 맺고 부산·원산·인천 세 항구를 열었습니다.","강화도 조약","조선이 처음 맺은 근대적 조약입니다."],
+["이 조약은 일본인이 조선에서 죄를 지어도 일본 법으로 재판받는 {}과 같은 불공평한 내용이 담겼습니다.","치외법권","외국인이 그 나라 법의 적용을 받지 않는 권리입니다."],
+["이 조약에는 일본 배가 조선 바닷길을 마음대로 조사할 수 있는 {}도 담겼습니다.","해안 측량권","일본이 조선 해안을 마음대로 측량할 수 있는 권리입니다."],
+["이처럼 한쪽 나라에만 유리한 {}이었기 때문에 조선에게는 큰 손해였습니다.","불평등 조약","서로 공평하지 않은 조약을 뜻합니다."],
+["개항 이후 정부가 신식 군대(별기군)만 우대하고 구식 군인에게는 13개월 만에 모래와 겨가 섞인 쌀을 주자, 분노한 구식 군인들이 일으킨 사건이 {}입니다.","임오군란","1882년(임오년) 구식 군인들의 난입니다."],
+["청나라의 간섭이 심해지자, {} 등 젊은 개화파는 청나라에서 벗어나고 신분제를 없애 빠른 개혁을 이루겠다고 했습니다.","김옥균","급진 개화파의 대표 인물입니다."],
+["젊은 개화파가 {}을 일으켰으나 3일 만에 실패했습니다.","갑신정변","1884년(갑신년) 일어난 3일 천하의 개혁입니다."]]},
+{n:"3막",t:"백성이 들고 일어난 사발과 새로운 나라의 꿈",s:"동학 ~ 독립협회",c:"var(--gold)",q:[
+["탐관오리 조병갑의 세금 수탈이 심해지자, 고부의 농민들은 대장이 누구인지 숨기기 위해 밥그릇을 엎어 테두리를 따라 이름을 둥글게 적은 {}을 돌렸습니다.","사발통문","사발 모양으로 이름을 돌려 적은 통지문입니다."],
+["‘사람이 곧 하늘이다’라는 동학 사상을 바탕으로 {}을 중심으로 농민들의 대규모 저항이 일어났습니다.","전봉준","동학 농민군을 이끈 지도자입니다."],
+["동학 사상을 바탕으로 농민들이 크게 저항한 사건이 {}(1894)입니다.","동학농민운동","1894년 농민들이 부패한 관리와 외세에 맞선 운동입니다."],
+["일본과 청나라 사이에서 흔들리던 나라의 임금 {}은 새로운 나라를 세우려 했습니다.","고종","조선의 제26대 임금입니다."],
+["1897년 고종은 황제로 즉위하며 나라 이름을 {}으로 바꾸고 자주독립 국가임을 알렸습니다.","대한제국","조선이 자주독립 국가임을 선포하며 바꾼 이름입니다."],
+["서재필 등이 1896년에 펴낸 우리나라 최초의 한글 민간 신문은 {}입니다.","독립신문","한글과 영문으로 발행되어 국민을 깨우쳤습니다."],
+["서재필과 개화 지식인들이 자주독립과 개혁을 외치며 만든 단체가 {}입니다.","독립협회","독립문을 세우고 토론회를 열었습니다."],
+["독립협회가 종로에서 열어 백성 누구나 참여한 자유로운 토론 대회를 {}라고 합니다.","만민공동회","‘모든 백성이 함께 모인 모임’이라는 뜻입니다."]]}
+];
+var app=document.getElementById("app"),best={},st={};
+try{best=JSON.parse(localStorage.getItem("jq-best")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("jq-best",JSON.stringify(best))}catch(e){}}
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var ac;function tone(f,d){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();var o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+function home(){
+ var h='<h1>거대한 파도 앞의<br>조선 말기 퀴즈</h1><p class="sub">5학년 사회 빈칸 학습지로 만든 퀴즈입니다. 막을 골라 빈칸을 채워 보세요.</p><div class="stages">';
+ S.forEach(function(s,i){var b=best[i];h+='<button class="stage" style="--c:'+s.c+'" data-i="'+i+'"><span class="n">'+s.n+'</span><span><b>'+s.t+'</b><small>'+s.s+' · '+s.q.length+'문제</small></span><span class="stars" aria-label="최고 별 '+(b?b.stars:0)+'개">'+(b?"★".repeat(b.stars)+"☆".repeat(3-b.stars):"☆☆☆")+'</span></button>'});
+ h+='<button class="stage" style="--c:var(--ink)" data-i="all"><span class="n">전막</span><span><b>전체 도전</b><small>세 막의 문제를 섞어서 풀어요 · '+(S[0].q.length+S[1].q.length+S[2].q.length)+'문제</small></span></button></div>';
+ app.innerHTML=h;
+ app.querySelectorAll(".stage").forEach(function(b){b.onclick=function(){start(b.dataset.i)}});
+}
+function start(i,only){
+ var qs=[],words=[],c;
+ if(i==="all"){S.forEach(function(s){s.q.forEach(function(q){qs.push({q:q,w:s.q.map(function(x){return x[1]}),c:s.c,n:s.n})})});c="var(--ink)"}
+ else{var s=S[i];c=s.c;s.q.forEach(function(q){qs.push({q:q,w:s.q.map(function(x){return x[1]}),c:s.c,n:s.n})})}
+ if(only)qs=qs.filter(function(x){return only.indexOf(x.q[1])>-1});
+ st={i:i,qs:sh(qs),k:0,hp:5,sc:0,combo:0,used:{},wrong:[],done:false,miss:false,c:c};
+ show();
+}
+function show(){
+ var x=st.qs[st.k],total=st.qs.length;
+ var words=sh(x.w);if(st.i==="all"){words=sh(x.w)}
+ var parts=x.q[0].split("{}");
+ var h='<div style="--c:'+st.c+'"><div class="top"><button class="back" id="bk">← 나가기</button><span class="hearts" aria-label="목숨 '+st.hp+'">'+"❤".repeat(st.hp)+"♡".repeat(5-st.hp)+'</span><span class="score">'+st.sc+'점</span></div><div class="bar"><i style="width:'+(st.k/total*100)+'%"></i></div>';
+ h+='<div class="q" id="qb"><div class="tag">'+x.n+' · '+(st.k+1)+'/'+total+'번째 빈칸</div><p>'+parts[0]+'<span class="blank" id="bl">&nbsp;</span>'+parts[1]+'</p><div class="fb" id="fb"></div></div>';
+ h+='<div class="bank" id="bank">';
+ words.forEach(function(w){h+='<button class="chip" data-w="'+w+'"'+(st.used[w]?" disabled":"")+'>'+w+'</button>'});
+ h+='</div><div class="actions"><span class="combo" id="cb">'+(st.combo>1?st.combo+"연속 정답!":"")+'</span><span><button class="tool" id="hint">힌트 (−30점)</button> <button class="btn hidden" id="nx" style="--c:'+st.c+'">다음 문제</button></span></div></div>';
+ app.innerHTML=h;
+ document.getElementById("bk").onclick=home;
+ document.getElementById("hint").onclick=function(){hint(x)};
+ app.querySelectorAll(".chip").forEach(function(b){b.onclick=function(){pick(b,x)}});
+}
+function hint(x){if(st.done)return;st.sc=Math.max(0,st.sc-30);var f=document.getElementById("fb");f.className="fb show";f.textContent="힌트: "+x.q[1].length+"글자, 첫 글자는 ‘"+x.q[1].charAt(0)+"’입니다.";tone(520,.1);document.querySelector(".score").textContent=st.sc+"점"}
+function pick(b,x){
+ if(st.done)return;
+ var f=document.getElementById("fb"),bl=document.getElementById("bl");
+ if(b.dataset.w===x.q[1]){
+  st.done=true;st.combo++;st.sc+=100+(st.combo-1)*20;st.used[x.q[1]]=1;
+  bl.textContent=x.q[1];bl.className="blank ok";f.className="fb show good";f.textContent="정답! "+x.q[2];
+  tone(660,.12);setTimeout(function(){tone(880,.18)},110);
+  app.querySelectorAll(".chip").forEach(function(c){c.disabled=true});
+  document.querySelector(".score").textContent=st.sc+"점";
+  document.getElementById("cb").textContent=st.combo>1?st.combo+"연속 정답! +"+((st.combo-1)*20):"";
+  document.getElementById("hint").classList.add("hidden");
+  var nx=document.getElementById("nx");nx.classList.remove("hidden");nx.textContent=st.k+1>=st.qs.length?"결과 보기":"다음 문제";nx.focus();nx.onclick=next;
+ }else{
+  st.combo=0;st.hp--;b.disabled=true;tone(180,.25);
+  if(st.wrong.indexOf(x.q[1])<0)st.wrong.push(x.q[1]);
+  var q=document.getElementById("qb");q.classList.remove("shake");void q.offsetWidth;q.classList.add("shake");
+  f.className="fb show bad";f.textContent="아쉬워요. 다시 생각해 볼까요?";
+  document.querySelector(".hearts").textContent="❤".repeat(Math.max(st.hp,0))+"♡".repeat(5-Math.max(st.hp,0));
+  document.getElementById("cb").textContent="";
+  if(st.hp<=0){setTimeout(function(){result(true)},600)}
+ }
+}
+function next(){st.k++;st.done=false;if(st.k>=st.qs.length)result(false);else show()}
+function result(over){
+ var w=st.wrong.length,stars=over?0:(w===0?3:w<=2?2:1),i=st.i;
+ if(i!=="all"&&!over){var b=best[i];if(!b||st.sc>b.sc||stars>b.stars){best[i]={sc:Math.max(st.sc,b?b.sc:0),stars:Math.max(stars,b?b.stars:0)};save()}}
+ var h='<div class="res" style="--c:'+st.c+'"><h2 style="font-size:34px">'+(over?"목숨을 모두 잃었어요":"훌륭해요! 막을 마쳤어요")+'</h2><div class="big">'+(over?"💔":"★".repeat(stars)+"☆".repeat(3-stars))+'</div><div class="pt">'+st.sc+'점</div><p class="sub">'+(over?"괜찮아요, 다시 도전하면 더 잘할 수 있어요.":(w===0?"한 문제도 틀리지 않았어요!":"틀린 문제 "+w+"개"))+'</p>';
+ if(w){h+='<div class="wr"><b>복습할 단어</b><ul>';st.wrong.forEach(function(a){var q=null;S.forEach(function(s){s.q.forEach(function(z){if(z[1]===a)q=z})});h+='<li><b>'+a+'</b> – '+q[2]+'</li>'});h+='</ul></div>'}
+ h+='<p><button class="btn" id="re" style="--c:'+st.c+'">다시 도전</button> ';
+ if(w&&!over)h+='<button class="btn" id="rv" style="--c:var(--ok)">틀린 것만 다시</button> ';
+ h+='<button class="back" id="hm">처음으로</button></p></div>';
+ app.innerHTML=h;
+ document.getElementById("re").onclick=function(){start(i)};
+ document.getElementById("hm").onclick=home;
+ var rv=document.getElementById("rv");if(rv)rv.onclick=function(){start(i,st.wrong.slice())};
+}
+home();
+</script>
+</body>
+</html>
